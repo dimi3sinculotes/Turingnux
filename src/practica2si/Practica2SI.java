@@ -51,6 +51,11 @@ public class Practica2SI {
                 
             case "c":
             case "C":
+                System.out.println("\nSelect the key for Transp alg");
+                String ckey = scaner.nextLine();
+                System.out.println("Type or Paste the coded text to try to decode");
+                input = scaner.nextLine();
+                transpAlg(ckey, input, map);
                 break;
                 
             default:
@@ -112,7 +117,6 @@ public class Practica2SI {
     }
     public static void cesarAlg(int key, String input, char[] map){
         int value;
-        System.out.println(input);
         String output = "";
         for (int i = 0; i < input.length(); i++) {
             value = getvalue(map, input.charAt(i));
@@ -151,6 +155,64 @@ public class Practica2SI {
                 j++;
             }else{
                 output = output + input.charAt(i);
+            }
+        }
+        System.out.println(output);
+    }
+    
+    public static char[] sortedKey(String keyy, char[] map){
+        String[] key = keyy.split("");
+        String tmp = "";
+        char[] toret = new char[keyy.length()];
+        
+        for(int i = 0; i < key.length - 1; i++){
+            for(int j = 0; j < key.length - 1; j++){
+                if((getvalue(map, key[j].charAt(0))) > (getvalue(map, key[j + 1].charAt(0)))){
+                    tmp = key[j];
+                    key[j] = key[j+1];
+                    key[j+1] = tmp;
+                }
+            }
+        }
+        for(int i = 0; i < key.length ; i++){
+            toret[i] = key[i].charAt(0);
+        }
+        return toret;
+    }
+    public static int whereChar(char c, String s){
+        int toret = -1;
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == c){
+                toret = i;
+            }
+        }
+        return toret;
+    }
+    public static void transpAlg(String key, String input, char[] map){
+        int j = 0;
+        int k = 0;
+        int l = 0;
+        String output = "";
+        int columnLength = (input.length() / key.length());
+        
+        char[][] columns = new char[key.length()][columnLength];
+        
+        while(j < key.length()){
+            l = 0;
+            while(k < columnLength){
+                columns[j][l] = input.charAt(k);
+                System.out.print(columns[j][l]);
+                k++;
+                l++;
+            }
+            System.out.println("");
+            j++;
+        }
+        char[] sortedKey = sortedKey(key, map);
+        for (int i = 0; i < sortedKey.length; i++) {
+            int pos = whereChar(sortedKey[i], key);
+            for (int m = 0; m < columnLength; m++) {
+                output = output + columns[pos][m];
             }
         }
         System.out.println(output);
