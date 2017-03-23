@@ -199,22 +199,23 @@ public class Practica2SI {
         
         while(j < key.length()){
             l = 0;
-            while(k < columnLength){
+            while(l < columnLength){
                 columns[j][l] = input.charAt(k);
-                System.out.print(columns[j][l]);
                 k++;
                 l++;
             }
             System.out.println("");
             j++;
         }
-        char[] sortedKey = sortedKey(key, map);
-        for (int i = 0; i < sortedKey.length; i++) {
-            int pos = whereChar(sortedKey[i], key);
-            for (int m = 0; m < columnLength; m++) {
-                output = output + columns[pos][m];
+        for (int i = 0; i < columnLength; i++) {
+            for (int m = 0; m < key.length(); m++) {
+                System.out.print(columns[m][i]);
             }
+            System.out.println("");
         }
+        char[] sortedKey = sortedKey(key, map);
+        
+        
         System.out.println(output);
     }
 }
